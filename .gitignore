@@ -1,6 +1,9 @@
 # Static files
 /static
 
+# Media files
+/media
+
 # Supplementary directories
 /favicon_io
 /Additions

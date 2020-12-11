@@ -4,10 +4,10 @@ from . import views
 
 
 urlpatterns = [
-    path('movie', views.MovieListView.as_view()),
-    path('movie/<int:pk>', views.MovieDetailView.as_view()),
-    path('review', views.ReviewCreateView.as_view()),
-    path('rating', views.RatingCreateView.as_view()),
-    path('actors', views.ActorListView.as_view()),
-    path('actor/<int:pk>', views.ActorDetailView.as_view()),
+    path('movie/', views.MovieListView.as_view()),
+    path('movie/<int:pk>/', views.MovieDetailView.as_view()),
+    path('review/', views.ReviewCreateView.as_view()),
+    path('rating/', views.RatingCreateView.as_view()),
+    path('actors/', views.ActorListView.as_view()),
+    path('actor/<int:pk>/', views.ActorDetailView.as_view()),
 ]

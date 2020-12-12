@@ -39,13 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'movies',
+    
     'rest_framework', 
     'rest_framework.authtoken',
+    'djoser',
+    
     'ckeditor',
     'ckeditor_uploader',
+    
     'django_filters',
-    'djoser',
+    
     'drf_yasg',
+    
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
 ]
 
 MIDDLEWARE = [
@@ -218,6 +226,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
     )
 }
 
@@ -266,3 +277,15 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'dinislamsmackov@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
+
+
+# SOCIAL AUTHENTICATION
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7695926'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'ia2lBM9UiZUaGhvJpj4l'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)

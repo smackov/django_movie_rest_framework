@@ -7,7 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Movie, Actor
 from .serializers import (MovieListSerializer, MovieDetailSerializer, ReviewCreateSerializer,
                           RatingCreateSerializer, ActorListSerializer, ActorDetailSerializer)
-from .services import get_client_ip, MovieFilter
+from .services import get_client_ip, MovieFilter, PaginationMovies
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -16,6 +16,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     """
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MovieFilter
+    pagination_class = PaginationMovies
     
     def get_queryset(self):
         movies = Movie.objects.filter(draft=False).annotate(
@@ -26,7 +27,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
             )
         ).annotate(
             average_star=models.Sum(models.F('ratings__star'))/models.Count(models.F('ratings'))
-        )
+        ).order_by('title', 'category')
         return movies
     
     def get_serializer_class(self):
